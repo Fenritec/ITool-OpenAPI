@@ -1,0 +1,799 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+        "title": "ITool Comptabilité / Gestion Commerciale",
+        "description": "Solution en ligne de comptabilité et gestion commerciale. Spécification OpenAPI rédigées par Fenritec S.A.S.",
+        "version": "1.0.0",
+        "termsOfService": "https://www.itool.com/cgv-cgu",
+        "contact": {
+            "name": "Fenritec",
+            "url": "https://shop.fenritec.eu/nous-contacter/"
+        },
+        "license": {
+            "name": "MIT"
+        }
+    },
+    "servers": [
+        {
+            "url": "https://applis.itool.net/api",
+            "description": "ITool Production Server"
+        }
+    ],
+    "paths": {
+        "/v1/api/dossiers": {
+            "get": {
+                "operationId": "V1DossierList",
+                "description": "Donne la liste des dossiers",
+                "tags": [
+                    "Dossier"
+                ],
+                "security": [
+                    {
+                        "API-key": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/V1Dossier"
+                                            }
+                                        },
+                                        "success": {
+                                            "type": "boolean"
+                                        },
+                                        "total": {
+                                            "type": "number"
+                                        }
+                                    },
+                                    "required": [
+                                        "data",
+                                        "success",
+                                        "total"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/V1Error"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/api/dossiers/{DosId}/tiers/client": {
+            "get": {
+                "operationId": "V1ClientList",
+                "description": "Lister les clients",
+                "tags": [
+                    "Client"
+                ],
+                "parameters": [
+                    {
+                        "name": "DosId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "security": [
+                    {
+                        "API-key": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/V1Client"
+                                            }
+                                        },
+                                        "success": {
+                                            "type": "boolean"
+                                        },
+                                        "total": {
+                                            "type": "integer"
+                                        }
+                                    },
+                                    "required": [
+                                        "data",
+                                        "success",
+                                        "total"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/V1Error"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "operationId": "V1ClientCreate",
+                "description": "Créer un client",
+                "tags": [
+                    "Client"
+                ],
+                "parameters": [
+                    {
+                        "name": "DosId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "security": [
+                    {
+                        "API-key": []
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/V1Client"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/V1Client"
+                                            }
+                                        },
+                                        "success": {
+                                            "type": "boolean"
+                                        },
+                                        "total": {
+                                            "type": "integer"
+                                        }
+                                    },
+                                    "required": [
+                                        "data",
+                                        "success",
+                                        "total"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/V1Error"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/api/dossiers/{DosId}/tiers/client/{TrsId}": {
+            "get": {
+                "operationId": "V1ClientGet",
+                "description": "Récupérer un client",
+                "tags": [
+                    "Client"
+                ],
+                "parameters": [
+                    {
+                        "name": "DosId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "TrsId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "security": [
+                    {
+                        "API-key": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/V1Client"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/V1Error"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "update": {
+                "operationId": "V1ClientUpdate",
+                "description": "Modifier un client",
+                "tags": [
+                    "Client"
+                ],
+                "parameters": [
+                    {
+                        "name": "DosId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "TrsId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "security": [
+                    {
+                        "API-key": []
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/V1Client"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/V1Client"
+                                        },
+                                        "success": {
+                                            "type": "boolean"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "data",
+                                        "success",
+                                        "message"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/V1Error"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "operationId": "V1ClientDelete",
+                "description": "Supprimer un client",
+                "tags": [
+                    "Client"
+                ],
+                "parameters": [
+                    {
+                        "name": "DosId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "TrsId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "security": [
+                    {
+                        "API-key": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "success",
+                                        "message"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/V1Error"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/api/dossiers/{DosId}/tiers/familles": {
+            "get": {
+                "operationId": "V1FamilleClientList",
+                "description": "Lister les familles de client",
+                "tags": [
+                    "Familles Clients"
+                ],
+                "parameters": [
+                    {
+                        "name": "DosId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "security": [
+                    {
+                        "API-key": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/V1FamilleClient"
+                                            }
+                                        },
+                                        "success": {
+                                            "type": "boolean"
+                                        },
+                                        "total": {
+                                            "type": "integer"
+                                        }
+                                    },
+                                    "required": [
+                                        "data",
+                                        "success",
+                                        "total"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/V1Error"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "V1Error": {
+                "type": "object",
+                "properties": {
+                    "success": {
+                        "type": "boolean"
+                    },
+                    "error": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "message": {
+                                    "type": "string"
+                                },
+                                "property_path": {
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "message"
+                            ],
+                            "additionalProperties": true
+                        }
+                    }
+                },
+                "required": [
+                    "success",
+                    "error"
+                ]
+            },
+            "V1Adresse": {
+                "type": "object",
+                "properties": {
+                    "AdrId": {
+                        "type": "integer"
+                    },
+                    "AdrAdresse": {
+                        "type": "string"
+                    },
+                    "AdrCodePostal": {
+                        "type": "string"
+                    },
+                    "AdrLocalite": {
+                        "type": "string"
+                    },
+                    "AdrPays": {
+                        "type": "string"
+                    },
+                    "AdrCodePays": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "AdrAdresse",
+                    "AdrCodePostal",
+                    "AdrLocalite",
+                    "AdrPays",
+                    "AdrCodePays"
+                ]
+            },
+            "V1AdresseEtendue": {
+                "type": "object",
+                "allOf": [
+                    {
+                        "type": "object",
+                        "properties": {
+                            "AdrId": {
+                                "type": "integer"
+                            },
+                            "AdrRaisonSociale": {
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "AdrRaisonSociale"
+                        ]
+                    },
+                    {
+                        "$ref": "#/components/schemas/V1Adresse"
+                    }
+                ]
+            },
+            "V1Dossier": {
+                "type": "object",
+                "properties": {
+                    "DosId": {
+                        "type": "integer"
+                    },
+                    "designation": {
+                        "type": "string"
+                    },
+                    "dateOuvertureExercice": {
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "dateFinExercice": {
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "isCe": {
+                        "type": "boolean"
+                    },
+                    "isCe2": {
+                        "type": "boolean"
+                    },
+                    "isCompta": {
+                        "type": "boolean"
+                    },
+                    "isFacto": {
+                        "type": "boolean"
+                    },
+                    "isAssurance": {
+                        "type": "boolean"
+                    }
+                },
+                "required": [
+                    "DosId",
+                    "designation",
+                    "dateOuvertureExercice",
+                    "dateFinExercice",
+                    "isCe",
+                    "isCompta",
+                    "isFacto",
+                    "isAssurance"
+                ]
+            },
+            "V1Client": {
+                "type": "object",
+                "properties": {
+                    "TrsId": {
+                        "type": "integer"
+                    },
+                    "Code": {
+                        "type": "string"
+                    },
+                    "TrsRaisonSociale": {
+                        "type": "string"
+                    },
+                    "FamDesignation": {
+                        "type": "string"
+                    },
+                    "FormeJuridique": {
+                        "type": "string"
+                    },
+                    "TrsObservation": {
+                        "type": "string"
+                    },
+                    "TrsNumeroTVA": {
+                        "type": "string"
+                    },
+                    "TauxRemise": {
+                        "type": "string"
+                    },
+                    "numero_tel": {
+                        "type": "string"
+                    },
+                    "numero_fax": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "urlSite": {
+                        "type": "string"
+                    },
+                    "urlLien": {
+                        "type": "string"
+                    },
+                    "ClientPropriete": {
+                        "type": "object",
+                        "properties": {
+                            "RtvDesignation": {
+                                "type": "string"
+                            },
+                            "Compte": {
+                                "type": "string"
+                            },
+                            "SousCompte": {
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "RtvDesignation"
+                        ]
+                    },
+                    "ClientFacto": {
+                        "type": "object",
+                        "properties": {
+                            "CmrCode": {
+                                "type": "string"
+                            },
+                            "CrglId": {
+                                "type": "integer"
+                            }
+                        },
+                        "required": [
+                            "CmrCode",
+                            "CrglId"
+                        ]
+                    },
+                    "AdrFacturation": {
+                        "$ref": "#/components/schemas/V1AdresseEtendue"
+                    },
+                    "AdrLivraison": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/V1AdresseEtendue"
+                        }
+                    },
+                    "AdrClient": {
+                        "$ref": "#/components/schemas/V1Adresse"
+                    },
+                    "Contact": {
+                        "$ref": "#/components/schemas/V1ClientContact"
+                    },
+                    "TrsTypeClient": {
+                        "type": "string"
+                    },
+                    "TrsCodeServiceAcheteur": {
+                        "type": "string"
+                    },
+                    "TrsSiret": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "Code",
+                    "TrsRaisonSociale",
+                    "FamDesignation",
+                    "ClientPropriete"
+                ]
+            },
+            "V1ClientContact": {
+                "type": "object",
+                "properties": {
+                    "ConId": {
+                        "type": "integer"
+                    },
+                    "ConTitre": {
+                        "type": "string"
+                    },
+                    "ConNom": {
+                        "type": "string"
+                    },
+                    "ConFonction": {
+                        "type": "string"
+                    },
+                    "ConObservation": {
+                        "type": "string"
+                    },
+                    "ConDefault": {
+                        "type": "boolean"
+                    },
+                    "ConEmail": {
+                        "type": "string"
+                    },
+                    "ConTelephone": {
+                        "type": "string"
+                    },
+                    "ConPortable": {
+                        "type": "string"
+                    },
+                    "ConFax": {
+                        "type": "string"
+                    },
+                    "Adresses": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/V1AdresseEtendue"
+                        }
+                    }
+                },
+                "required": [
+                    "ConTitre",
+                    "ConNom",
+                    "ConPrenom",
+                    "ConFonction",
+                    "ConObservation",
+                    "ConDefault",
+                    "ConEmail"
+                ]
+            },
+            "V1FamilleClient": {
+                "type": "object",
+                "properties": {
+                    "Id": {
+                        "type": "integer"
+                    },
+                    "TfaId": {
+                        "type": "integer"
+                    },
+                    "Designation": {
+                        "type": "string"
+                    },
+                    "TauxRemise": {
+                        "type": "number"
+                    },
+                    "NrClient": {
+                        "type": "integer"
+                    },
+                    "FamilleVarianteClients": {
+                        "type": "object"
+                    },
+                    "Compte": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "Id",
+                    "TfaId",
+                    "Designation",
+                    "TauxRemise",
+                    "NrClient",
+                    "FamilleVarianteClients",
+                    "Compte"
+                ]
+            }
+        },
+        "securitySchemes": {
+            "API-key": {
+                "type": "apiKey",
+                "name": "apiToken",
+                "in": "header"
+            }
+        }
+    }
+}
